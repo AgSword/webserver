@@ -47,6 +47,7 @@ threadpool<T>::threadpool(int thread_num, int max_requests) :   // 构造函数�
         printf("creating the N0.%d thread.\n", i);
 
         // 创建线程, worker（线程函数） 必须是静态的函数
+        // 
         if(pthread_create(m_threads + i, NULL, worker, this) != 0){     // 通过最后一个参数向 worker 传递 this 指针，来解决静态函数无法访问非静态成员的问题
             delete [] m_threads;        // 创建失败，则释放数组空间，并抛出异常
             throw std::exception();
